@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "strict": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    },
+    "plugins": [{ "transform": "io-ts-transformer/transformer" }],
+    "types": ["@types/jest"],
+    "typeRoots": ["./src/types"]
+  },
+  "include": ["src/**/*", "headless", "tests", "knexfile.js", "testingData"],
+  "exclude": ["src/**/*.test.ts"]
+}
