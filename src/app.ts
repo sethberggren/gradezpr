@@ -11,6 +11,7 @@ import { verifyToken } from "./http/middleware/verifyToken";
 import setNewTokenHeader from "./http/middleware/setNewTokenHeader";
 import initalize from "./http/routes/initialize/initializeRouter";
 import userRequestRouter from "./http/routes/userRequest/userRequestRouter";
+import { BUILD_TYPE } from "./config";
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
     firstName: "Padme",
     lastName: "Skywalker",
     forcePower: "Unlimited",
+    buildType: BUILD_TYPE
   });
 });
 

@@ -3,6 +3,13 @@ import bcrypt from "bcrypt";
 import { comparePasswords, encryptPassword } from "./passwordTools";
 import getUserByEmail from "./getUserByEmail";
 
+export class WrongPasswordError extends Error {
+  
+  constructor() {
+    super();
+  }
+}
+
 export default async function updatePassword(
   email: string,
   updateOrNew:
@@ -20,7 +27,7 @@ export default async function updatePassword(
       return await updateDbPassword(dbUser.id, encryptedPassword);
     } else {
       // how can i check for the error type in the try catch block of the parent (changePassword route?)
-      throw new Error("Passwords don't match!");
+      throw new WrongPasswordError();
     }
   } else {
     const { newPassword } = updateOrNew;

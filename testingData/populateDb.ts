@@ -11,6 +11,8 @@ import getUserByEmail from "../src/http/routes/authentication/getUserByEmail";
 import { InitializeResponse } from "../src/http/routes/initialize/initializeRouter";
 import {v4 as uuid} from "uuid";
 
+export const testUserEmail = "anakin_skywalker@theforce.net"
+
 const getTestUser = async () => {
   return {
     firstName: "Anakin",

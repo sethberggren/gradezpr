@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../../../models/User";
 import bcrypt from "bcrypt";
-import updatePassword from "./updatePassword";
+import updatePassword, { WrongPasswordError } from "./updatePassword";
 import { sendErrorFactory } from "../../errorResponses";
 
 export type ChangePasswordRequest = {
@@ -35,7 +35,7 @@ export default async function changePassword(req: Request,  res: Response) {
 
     res.status(200).send({status: "OK"});
   } catch (error: any) {
-    if (error.message === "Passwords don't match!") {
+    if (error instanceof WrongPasswordError) {
       sendError("incorrectPassword");
       return;
     }

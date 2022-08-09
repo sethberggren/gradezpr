@@ -8,6 +8,7 @@ const nonSecurePaths = [
   apiRoutes.registerWithGoogle,
   apiRoutes.linkWithGoogle,
   apiRoutes.loginWithGoogle,
+  apiRoutes.forgotPassword
 ];
 
 export function isNonSecurePath(req: Request): boolean {

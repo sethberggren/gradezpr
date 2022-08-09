@@ -7,7 +7,6 @@
 /coverage
 
 # production 
-
 /dist
 
 # misc
@@ -25,5 +24,12 @@ yarn-error.log*
 
 .env
 
+# deployment
 deploy.js
 todo.txt
+.env.dev
+Dockerfile
+.dockerignore
+gradezpr.tar.gz 
+default.conf
+

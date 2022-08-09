@@ -12,6 +12,7 @@ import { apiRoutes } from "../apiRoutes";
 import loginUserWithGoogle from "./loginUserWithGoogle";
 import grantAdditionalScopes from "./grantAdditionalScopes";
 import deleteUser from "./deleteUser";
+import forgotPassword from "./forgotPassword";
 
 const authenticationRouter = express.Router();
 authenticationRouter.use(express.json());
@@ -36,6 +37,7 @@ authenticationRouter.post(
   apiRoutes.grantAdditionalScopes,
   grantAdditionalScopes
 );
+authenticationRouter.post(apiRoutes.forgotPassword, forgotPassword);
 authenticationRouter.delete(apiRoutes.deleteUser, deleteUser);
 
 export default authenticationRouter;

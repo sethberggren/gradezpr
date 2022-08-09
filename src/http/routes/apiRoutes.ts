@@ -6,6 +6,7 @@ export const apiRoutes = {
     login: "/auth/login",
     register: "/auth/register",
     changePassword: "/auth/password-change",
+    forgotPassword: "/auth/forgot-password",
     students: "/gradeupdater/students",
     bulkUploadStudents: "/gradeupdater/students/bulk",
     courses: "/gradeupdater/courses",
