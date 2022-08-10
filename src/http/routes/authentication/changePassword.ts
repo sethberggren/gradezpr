@@ -16,6 +16,11 @@ export default async function changePassword(req: Request,  res: Response) {
   try {
     const user = req.user;
     const { oldPassword, newPassword, confirmPassword } = req.body;
+    
+    if (user.loggedInWithGoogle === true) {
+      sendError("isGoogleAccount");
+      return;
+    }
 
     if (!oldPassword && !newPassword && !confirmPassword) {
       sendError("noInformation");

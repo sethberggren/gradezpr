@@ -5,6 +5,7 @@ import { populateDb } from "../../../../testingData/populateDb";
 import { verifyApiResponseFactory } from "../../../../testingData/verifyApiResponseFactory";
 import { verifyErrorsFactory } from "../../../../testingData/verifyErrorsFactory";
 import { getErrorFactory } from "../../errorResponses";
+import {createUuidGoogleUser, deleteUuidGoogleUser, uuidGoogleCredentials} from "../../../../testingData/userTools"
 import { apiRoutes } from "../apiRoutes";
 
 type ChangePasswordRequest = {
@@ -34,7 +35,7 @@ const badRequestIncorrectPassword: ChangePasswordRequest = {
   confirmPassword: goodNewPassword,
 };
 
-const resetPassword: ChangePasswordRequest = {
+const resetPasswordToOriginal: ChangePasswordRequest = {
   oldPassword: goodNewPassword,
   newPassword: testLogin.password,
   confirmPassword: testLogin.password,
@@ -57,7 +58,7 @@ describe("change password endpoint", () => {
       "PATCH",
       { email: testLogin.email, password: goodNewPassword }
     );
-    await verifyPasswordRequestNewAuthentication(resetPassword, {
+    await verifyPasswordRequestNewAuthentication(resetPasswordToOriginal, {
       verifyOpt: "CODE",
     });
   });
@@ -80,9 +81,29 @@ describe("change password endpoint", () => {
     );
   });
 
+  it("should respond with an error if the user is trying to change the password for an account that is logged in with google", async () => {
+
+    await createUuidGoogleUser();
+
+    const uuidGoogleUser = uuidGoogleCredentials();
+
+    const badPasswordRequest : ChangePasswordRequest = {
+      oldPassword: uuidGoogleUser.password,
+      newPassword: "ThisWillNotWork",
+      confirmPassword: "ThisWillNotWork"
+    }
+
+    await verifyErrorsFactory(apiRoutes.changePassword, "PATCH", "PasswordChangeError", uuidGoogleUser)(badPasswordRequest, "isGoogleAccount");
+
+    await deleteUuidGoogleUser();
+
+})
+
   it("should respond appropriately with the correct information passed along", async () => {
     await verifyPasswordRequest(goodRequest, {
       verifyOpt: "CODE",
     });
   });
+
+
 });

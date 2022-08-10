@@ -2,12 +2,22 @@ import Knex from "knex";
 import { Model } from "objection";
 import { BUILD_TYPE, DATABASE_CXN, DATABASE_CXN_DEVELOPMENT } from "../config";
 
-console.log(BUILD_TYPE);
+const typeCast = {
+  typeCast: (field: any, next: any) => {
+    if (field.type === "TINY" && field.length === 1) {
+      const value = field.string();
+      return value ? value === "1" : null;
+    }
+    return next();
+  },
+};
 
 const knexOptions = {
   client: "mysql2",
   connection:
-    BUILD_TYPE === "production" ? DATABASE_CXN : DATABASE_CXN_DEVELOPMENT,
+    BUILD_TYPE === "production"
+      ? { ...DATABASE_CXN, ...typeCast }
+      : { ...DATABASE_CXN_DEVELOPMENT, ...typeCast },
   pool: {
     // proabably need to look into this more...but for now it's working.
     // afterCreate(conn: any, cb: any) {

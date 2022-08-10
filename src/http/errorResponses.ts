@@ -160,7 +160,7 @@ type PasswordChangeErrors =
   | "noInformation"
   | "passwordsDontMatch"
   | "incorrectPassword"
-  | "unknownError";
+  | "unknownError" | "isGoogleAccount";
 
 const passwordChangeErrors: ErrorInformation<"PasswordChangeError"> = {
   noInformation: {
@@ -191,6 +191,13 @@ const passwordChangeErrors: ErrorInformation<"PasswordChangeError"> = {
       message: unknownErrorResponse,
     },
   },
+  isGoogleAccount: {
+    errorCode: 400,
+    errorBody: {
+      name: "PasswordChangeError",
+      message:  "If you've logged in with Google, you can't change your password."
+    }
+  }
 };
 
 type UnknownErrors = "unknownError";

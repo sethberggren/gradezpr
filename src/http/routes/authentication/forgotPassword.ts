@@ -34,27 +34,27 @@ export default async function forgotPassword(req: Request, res: Response) {
 
     updatePassword(email, { type: "New", newPassword: tempPassword });
 
-    const testAcount = await nodemailer.createTestAccount();
-
-    const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false,
-      auth: {
-        user: testAcount.user,
-        pass: testAcount.pass,
-      },
-    });
+    // const testAcount = await nodemailer.createTestAccount();
 
     // const transporter = nodemailer.createTransport({
-    //     host: EMAIL_CONFIG.server,
-    //     port: EMAIL_CONFIG.port,
-    //     secure: true,
-    //     auth: {
-    //         user: EMAIL_CONFIG.username,
-    //         pass: EMAIL_CONFIG.password
-    //     }
+    //   host: "smtp.ethereal.email",
+    //   port: 587,
+    //   secure: false,
+    //   auth: {
+    //     user: testAcount.user,
+    //     pass: testAcount.pass,
+    //   },
     // });
+
+    const transporter = nodemailer.createTransport({
+        host: EMAIL_CONFIG.server,
+        port: EMAIL_CONFIG.port,
+        secure: true,
+        auth: {
+            user: EMAIL_CONFIG.username,
+            pass: EMAIL_CONFIG.password
+        }
+    });
 
     const info = await transporter.sendMail({
       from: `Seth Berggren <${EMAIL_CONFIG.username}>`,
@@ -63,7 +63,7 @@ export default async function forgotPassword(req: Request, res: Response) {
       html: resetPasswordEmail(user.firstName, tempPassword),
     });
 
-    console.log("Preview Url  " + nodemailer.getTestMessageUrl(info));
+    // console.log("Preview Url  " + nodemailer.getTestMessageUrl(info));
 
     res.status(200).send({ status: "OK" });
   } catch (e) {
