@@ -10,6 +10,7 @@ import { Assignment } from "../src/models/Assignment";
 import getUserByEmail from "../src/http/routes/authentication/getUserByEmail";
 import { InitializeResponse } from "../src/http/routes/initialize/initializeRouter";
 import {v4 as uuid} from "uuid";
+import { UserInformation } from "../src/http/routes/initialize/getUserInformation";
 
 export const testUserEmail = "anakin_skywalker@theforce.net"
 
@@ -284,9 +285,11 @@ export async function populateDb(returnResults: boolean): Promise<void | Initial
       course: string;
     }[];
 
-    const userInformation = {
+    const userInformation : UserInformation = {
       userGoogleRequiredScopes: false,
-      email: testUser.email
+      email: testUser.email,
+      isNewUser: false,
+      isLoggedInWithGoogle: false
     }
 
     return {courses, students, assignments, userInformation} as InitializeResponse;

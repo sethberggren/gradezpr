@@ -7,7 +7,10 @@ export default async function createUser(
   loggedInWithGoogle: boolean | undefined,
   googleToken: string | undefined
 ) {
-  let newUserValidated = new User().$validate(registrationForm) as User;
+  let newUserValidated = new User().$validate({
+    ...registrationForm,
+    isNewUser: true,
+  }) as User;
   newUserValidated.loggedInWithGoogle = loggedInWithGoogle;
   newUserValidated.googleToken = googleToken;
 
@@ -20,4 +23,4 @@ export default async function createUser(
 
   const createdUser = await User.query().insertAndFetch(newUserValidated);
   return createdUser;
-};
+}

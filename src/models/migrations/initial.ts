@@ -23,6 +23,7 @@ export const migrations: Migration[] = [
         table.string("googleToken");
         table.integer("permission").notNullable().unsigned();
         table.boolean("loggedInWithGoogle");
+        table.boolean("isNewUser");
       });
 
       await knex.schema.createTable("courses", (table) => {

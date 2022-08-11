@@ -6,50 +6,6 @@ import checkIfUserExists from "./checkIfUserExists";
 import createUser from "./createUser";
 import generateToken, { NewToken } from "./generateToken";
 
-// type RegistrationResponseStatus =
-//   | "OK"
-//   | "Passwords Do Not Match"
-//   | "Already Registered"
-//   | "Unknown Error";
-
-// type RegistrationResponse = {
-//   status: RegistrationResponseStatus;
-//   payload?: NewToken;
-// };
-
-// const registrationRespond = (
-//   status: RegistrationResponseStatus,
-//   token?: NewToken
-// ): RegistrationResponse => {
-//   switch (status) {
-//     case "Already Registered": {
-//       return {
-//         status: "Already Registered",
-//       };
-//     }
-
-//     case "OK": {
-//       if (token) {
-//         return token;
-//       } else {
-//         throw new Error("Must pass along token!");
-//       }
-//     }
-
-//     case "Passwords Do Not Match": {
-//       return {
-//         status: "Passwords Do Not Match",
-
-//       };
-//     }
-
-//     case "Unknown Error": {
-//       return {
-//         status: "Unknown Error",
-//       };
-//     }
-//   }
-// };
 
 export default async function registerUser(req: Request, res: Response) {
   const sendError = sendErrorFactory(res, "RegistrationError");

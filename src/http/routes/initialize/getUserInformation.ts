@@ -5,6 +5,8 @@ import getUserByEmail from "../authentication/getUserByEmail";
 export type UserInformation = {
   email: string;
   userGoogleRequiredScopes: boolean;
+  isNewUser: boolean;
+  isLoggedInWithGoogle: boolean;
 };
 
 export default async function getUserInformation(
@@ -27,5 +29,7 @@ export default async function getUserInformation(
   return {
     email: dbUser.email,
     userGoogleRequiredScopes: userIsLoggedInWithGoogle,
+    isNewUser: dbUser.isNewUser,
+    isLoggedInWithGoogle: dbUser.loggedInWithGoogle === true ? true : false,
   };
 }

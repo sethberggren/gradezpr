@@ -1,6 +1,8 @@
 import express from "express";
+import { initialize } from "objection";
 import { Assignment } from "../../../models/Assignment";
 import { Student } from "../../../models/Student";
+import { User } from "../../../models/User";
 import { AssignmentResponse } from "../../../services/curveGrades";
 import { sendErrorFactory } from "../../errorResponses";
 import { apiRoutes } from "../apiRoutes";
@@ -20,7 +22,6 @@ const initalize = express.Router();
 initalize.use(express.json());
 
 initalize.get(apiRoutes.initialize, async (req, res) => {
-
   const user = req.user;
 
   const sendError = sendErrorFactory(res, "UnknownError");

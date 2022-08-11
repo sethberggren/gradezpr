@@ -12,6 +12,7 @@ import setNewTokenHeader from "./http/middleware/setNewTokenHeader";
 import initalize from "./http/routes/initialize/initializeRouter";
 import userRequestRouter from "./http/routes/userRequest/userRequestRouter";
 import { BUILD_TYPE } from "./config";
+import welcomeRouter from "./http/routes/welcome/welcomeRouter";
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(assignments);
 app.use(upload);
 app.use(initalize);
 app.use(userRequestRouter);
+app.use(welcomeRouter);
 
 app.get("/", (req, res) => {
 

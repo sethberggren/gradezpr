@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles",
-    "start": "cd /Users/sethberggren/Documents/Web-Development/gradeupdater/dist/src; nodemon server.js;",
+    "start": "cd /Users/sethberggren/Documents/Web-Development/gradezpr/dist/src; BUILD_TYPE=farts nodemon server.js;",
     "tsc": "tsc",
     "tsc watch": "tsc -w",
     "deploy": "node deploy.js"

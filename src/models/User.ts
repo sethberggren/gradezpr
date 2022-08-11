@@ -11,6 +11,7 @@ const userJsonSchema = Type.Object({
   firstName: Type.String(),
   lastName: Type.String(),
   email: Type.String(),
+  isNewUser: Type.Boolean(),
   currAccessToken: Type.Optional(Type.String()),
   password: Type.String(),
   permission: Type.Optional(Type.Number()),
@@ -24,6 +25,7 @@ export class User extends Model {
   firstName!: string;
   lastName!: string;
   password!: string;
+  isNewUser!: boolean;
   currAccessToken?: string;
 
   permission?: number;

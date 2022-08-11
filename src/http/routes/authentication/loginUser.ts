@@ -7,9 +7,6 @@ import { comparePasswords } from "./passwordTools";
 import { sendErrorFactory } from "../../errorResponses";
 import { googleDefaultPassword } from "./registerWithGoogle";
 
-type TokenResponse = {
-  token: string;
-};
 
 export type LoginUserRequest = {
   email: string,
