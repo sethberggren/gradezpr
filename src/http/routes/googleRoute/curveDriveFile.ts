@@ -55,6 +55,8 @@ export default async function curveDriveFile(req: Request, res: Response) {
       req.user.id
     );
 
+    console.log(curveResponse);
+
     res.json(curveResponse);
   } catch (e) {
     console.log(e);

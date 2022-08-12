@@ -22,6 +22,7 @@ export default async function importDriveFile(req: Request, res: Response) {
     course: req.body.course,
   };
 
+  console.log("trying to import drive file...");
   if (hasAnyPropertyUndefined(toImport)) {
     sendError("noInformation");
     return;
