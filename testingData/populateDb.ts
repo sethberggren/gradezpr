@@ -21,7 +21,8 @@ const getTestUser = async () => {
     email: "anakin_skywalker@theforce.net",
     password: await bycrypt.hash("ch0s3n1*", 10),
     permission: 3,
-    googleToken: uuid()
+    googleToken: uuid(),
+    isNewUser: false
   };
 };
 
